@@ -1,50 +1,77 @@
 import './styles.scss';
 
-function slider(){
-    const prevButton : HTMLElement | null = document.querySelector('.prevButton');
-    const nextButton : HTMLElement | null = document.querySelector('.nextButton');
+document.addEventListener('DOMContentLoaded', function() {
+    const sliderWrapper = document.querySelector('.slider-wrapper') as HTMLElement;
+    const sliderBlocks = Array.from(sliderWrapper.querySelectorAll('.slider-block')) as HTMLElement[];
+    const prevButton = document.querySelector('.prevButton') as HTMLElement;
+    const nextButton = document.querySelector('.nextButton') as HTMLElement;
 
-    prevButton.addEventListener('click', ()=>{
-        console.log('1');
-    })
-}
-slider();
+    let currentIndex: number = 1; // Индекс активного слайда
 
-// Определение типа для NodeList, который возвращает querySelectorAll
-interface NodeList<T> extends NodeListOf<any> {}
+    function updateSliderPosition(index: number): void {
+        // Убираем класс 'active' у всех слайдов
+        sliderBlocks.forEach(block => block.classList.remove('active'));
 
-// Определение типа для элемента, который может быть получен через querySelector
-interface HTMLElementWithClass<T> extends HTMLElement {
-    classList: DOMTokenList & { [key: string]: boolean };
-}
+        // Добавляем класс 'active' к нужному слайду
+        sliderBlocks[index].classList.add('active');
+
+        // Здесь можно добавить логику для перемещения слайдов, если это необходимо
+        // Например, изменение CSS свойства 'transform' для каждого слайда
+    }
+
+    function moveSlider(direction: number): void {
+        currentIndex = (currentIndex + direction + sliderBlocks.length) % sliderBlocks.length;
+        updateSliderPosition(currentIndex);
+    }
+
+    prevButton.addEventListener('click', function() {
+        moveSlider(-1); // Переход к предыдущему слайду
+    });
+
+    nextButton.addEventListener('click', function() {
+        moveSlider(1); // Переход к следующему слайду
+    });
+
+    // Автоматическое обновление позиции слайдов каждые 5 секунд
+   /*setInterval(() => {
+        moveSlider(1); // Пример автоматического перехода к следующему слайду
+    }, 5000); */
+
+    // Инициализация слайдера
+    updateSliderPosition(currentIndex);
+});
+
+
+
+
+
 function increaseImg() {
     try {
-        const licenseImages: NodeList<HTMLElementWithClass<HTMLImageElement>> = document.querySelectorAll('.license-img');
-        const enlargedImages: NodeList<HTMLElementWithClass<HTMLDivElement>> = document.querySelectorAll('.enlarged-image');
+        const licenseImages: NodeListOf<HTMLImageElement> = document.querySelectorAll('.license-img');
+        const enlargedImages: NodeListOf<HTMLDivElement> = document.querySelectorAll('.enlarged-image');
         
-        // Проверяем, что коллекция enlargedImages не пуста
         if (enlargedImages.length === 0) throw new Error("Enlarged image not found");
         
-        // Преобразуем NodeList в массив для удобства работы
         const enlargedImagesArray = Array.from(enlargedImages);
 
-        licenseImages.forEach((licenseImg, index) => {
+        licenseImages.forEach((licenseImg: HTMLImageElement, index: number) => {
             const enlargedImage = enlargedImagesArray[index];
            
             licenseImg.addEventListener('click', () => {
-                enlargedImage.classList.add('active');
+                if (!enlargedImage.classList.contains('active')) {
+                    enlargedImage.classList.add('active');
+                } else {
+                    enlargedImage.classList.remove('active');
+                }
             });
         });
 
-        enlargedImagesArray.forEach(enlargedImage => {
-            enlargedImage.addEventListener('click', ()=>{
-                enlargedImage.classList.remove('active');
-                console.log('123');
-            })
-        })
     } catch (error) {
         console.error("Error in increaseImg function:", error);
     }
 }
 
 increaseImg();
+
+
+

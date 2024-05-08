@@ -1,4 +1,4 @@
-<h1>Webpack setup completed</h1>
+<h1>functionality development</h1>
 
 :hammer_and_wrench: Languages and Tools :
 <div>
