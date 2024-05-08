@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
+      //"types": ["./types"],
       "resolveJsonModule": true,
       "esModuleInterop": true,
       "outDir": "./dist/",

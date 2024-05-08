@@ -1,3 +1,5 @@
+@import "node_modules/@glidejs/glide/src/assets/sass/glide.core";
+@import "node_modules/@glidejs/glide/src/assets/sass/glide.theme";
 *{
     box-sizing: border-box;
     margin: 0;
@@ -159,6 +161,14 @@ nav{
     }
 }
 
+.glide{
+  img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
 
 
 .slider{
@@ -168,7 +178,7 @@ nav{
         font-size: 24px;
         font-weight: 600;
     }
-    position: relative;
+  
 }
 .slider-wrapper{
     display: flex;
@@ -178,39 +188,55 @@ nav{
     
     margin-top: 30px;
 }
+
 .slider-block{
+  
+    position: relative;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
-    background-color: rgb(14, 14, 14, .5);
+    gap: 20px;
     border-radius: 28px;
     opacity: 1;
-    transition: opacity 0.5s ease-in-out; /* Добавлено свойство transition */
+    transition: .5s; /* Добавлено свойство transition */
+    width: 200px;
+    height: 200px;
+    background-color: rgb(14, 14, 14, .5);
+   
     &.active{
       opacity: 1;
+      width: 300px;
+      height: 300px;
+      background-color: rgb(14, 14, 14, .5);
+  
+      p{
+        opacity: 1;
+        font-size: 25px;
+      }
     }
     img{
-        width: 400px;
-       z-index: -10;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: right;
+        z-index: -10;
+        opacity: 1;
+        border-radius: 28px;
+
+      
     }
     p{
         position: absolute;
         color: #FFFFFF;
-        font-size: 25px;
+        font-size: 15px;
         text-align: center;
-        width: 300px;
-    }
-}
-.prev , .next{
-    border-radius: 20px;
-    img{
-        width: 200px;
-    }
-    p{
+        width: 100%;
         opacity: 0;
+        transition: .5s;
     }
 }
+
 .prevButton{
     width: 30px;
     height: 30px;
@@ -309,7 +335,7 @@ nav{
         img{
             width: 300px;
             height: 423px;
-            cursor: zoom-in;
+            cursor: pointer;
             margin-top: -20px;
         }
         .lupa{
@@ -334,7 +360,6 @@ nav{
     img{
         width: 150px !important;
         height: 200px !important;
-        cursor: zoom-in;
         margin-top: -0px !important; 
     }
     .lupa{
@@ -347,32 +372,67 @@ nav{
     }
 }
 
-.enlarged-image{
-    position: fixed;
-    z-index: -200;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    transition: .5s;
-    &.active{
-        opacity: 1;
-        z-index: 200;
+.swiper {
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  z-index: -200;
+  transition: .5s;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  &.show{
+    opacity: 1;
+    z-index: 100;
+  }
+  .close{
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    z-index: 105;
+    right: 20px;
+    top: 20px;
+    cursor: pointer;
+    span{
+      position: absolute;
+      right: 0px;
+      top: 20px;
+      width: 40px;
+      height: 3px;
+      background-color: white;
+      transform: rotate(45deg);
+      &:nth-of-type(2){
+        transform: rotate(-45deg);
+      }
     }
-    img{
-        width: 100% !important;
-        height: 100% !important;
-        object-fit: contain;
-        cursor: zoom-out !important; 
-    }
+  }
 }
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: rgb(14, 14, 14, .8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: grab;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 400px;
+  height: 100vh;
+  object-fit: cover;
+}
+.swiper-button-next, .swiper-button-prev{
+  color: white;
+}
+
+
+
+
+
+
 .addres{
   margin-top: 50px;
   h2{

@@ -1,43 +1,61 @@
 import './styles.scss';
+import Glide from '@glidejs/glide';
 
+// Инициализируем Glide с опцией perView равной 3
+const glide = new Glide('.glide', {
+    type: 'carousel',
+    focusAt: 'center',
+    startAt: 1,
+    perView: 3,
+    gap: 30,
+    breakpoints: {
+        1024: {
+          perView: 2
+        },
+        600: {
+          perView: 1
+        }
+    }
+  });
+  
+  // Применяем настройки
+  glide.mount();
+
+  
 document.addEventListener('DOMContentLoaded', function() {
     const sliderWrapper = document.querySelector('.slider-wrapper') as HTMLElement;
     const sliderBlocks = Array.from(sliderWrapper.querySelectorAll('.slider-block')) as HTMLElement[];
     const prevButton = document.querySelector('.prevButton') as HTMLElement;
     const nextButton = document.querySelector('.nextButton') as HTMLElement;
-
     let currentIndex: number = 1; // Индекс активного слайда
-
+    
     function updateSliderPosition(index: number): void {
         // Убираем класс 'active' у всех слайдов
         sliderBlocks.forEach(block => block.classList.remove('active'));
-
+        
         // Добавляем класс 'active' к нужному слайду
         sliderBlocks[index].classList.add('active');
+        
 
         // Здесь можно добавить логику для перемещения слайдов, если это необходимо
         // Например, изменение CSS свойства 'transform' для каждого слайда
+        console.log( sliderBlocks[index])
     }
 
     function moveSlider(direction: number): void {
         currentIndex = (currentIndex + direction + sliderBlocks.length) % sliderBlocks.length;
         updateSliderPosition(currentIndex);
+        console.log(currentIndex)
     }
 
     prevButton.addEventListener('click', function() {
-        moveSlider(-1); // Переход к предыдущему слайду
+        moveSlider(1); // Переход к предыдущему слайду
     });
 
     nextButton.addEventListener('click', function() {
-        moveSlider(1); // Переход к следующему слайду
+        moveSlider(-1); // Переход к следующему слайду
     });
 
-    // Автоматическое обновление позиции слайдов каждые 5 секунд
-   /*setInterval(() => {
-        moveSlider(1); // Пример автоматического перехода к следующему слайду
-    }, 5000); */
-
-    // Инициализация слайдера
     updateSliderPosition(currentIndex);
 });
 
@@ -46,29 +64,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 function increaseImg() {
-    try {
         const licenseImages: NodeListOf<HTMLImageElement> = document.querySelectorAll('.license-img');
-        const enlargedImages: NodeListOf<HTMLDivElement> = document.querySelectorAll('.enlarged-image');
-        
-        if (enlargedImages.length === 0) throw new Error("Enlarged image not found");
-        
-        const enlargedImagesArray = Array.from(enlargedImages);
+        const swiper: HTMLDivElement = document.querySelector('.swiper');
+        const close: HTMLDivElement = document.querySelector('.close');
 
-        licenseImages.forEach((licenseImg: HTMLImageElement, index: number) => {
-            const enlargedImage = enlargedImagesArray[index];
-           
+        licenseImages.forEach((licenseImg: HTMLImageElement) => {
             licenseImg.addEventListener('click', () => {
-                if (!enlargedImage.classList.contains('active')) {
-                    enlargedImage.classList.add('active');
-                } else {
-                    enlargedImage.classList.remove('active');
-                }
+                    swiper.classList.add('show');
             });
         });
 
-    } catch (error) {
-        console.error("Error in increaseImg function:", error);
-    }
+        close.addEventListener('click', ()=>{
+            swiper.classList.remove('show');
+        })
 }
 
 increaseImg();

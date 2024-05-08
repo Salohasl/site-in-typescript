@@ -1,5 +1,10 @@
 <h1>functionality development</h1>
+<a href="https://salohasl.github.io/site-in-typescript/">https://salohasl.github.io/site-in-typescript/</a>
 
+<h2>Using the Glide.js library</h2>
+
+
+---
 :hammer_and_wrench: Languages and Tools :
 <div>
   <img src="https://github.com/devicons/devicon/blob/master/icons/sass/sass-original.svg" title="Sass" alt="Sass" width="40" height="40"/>&nbsp;
