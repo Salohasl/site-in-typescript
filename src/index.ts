@@ -1,27 +1,5 @@
 import './styles.scss';
-import Glide from '@glidejs/glide';
 
-// Инициализируем Glide с опцией perView равной 3
-const glide = new Glide('.glide', {
-    type: 'carousel',
-    focusAt: 'center',
-    startAt: 1,
-    perView: 3,
-    gap: 30,
-    breakpoints: {
-        1024: {
-          perView: 2
-        },
-        600: {
-          perView: 1
-        }
-    }
-  });
-  
-  // Применяем настройки
-  glide.mount();
-
-  
 document.addEventListener('DOMContentLoaded', function() {
     const sliderWrapper = document.querySelector('.slider-wrapper') as HTMLElement;
     const sliderBlocks = Array.from(sliderWrapper.querySelectorAll('.slider-block')) as HTMLElement[];
@@ -49,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     prevButton.addEventListener('click', function() {
-        moveSlider(1); // Переход к предыдущему слайду
+        moveSlider(-1); // Переход к предыдущему слайду
     });
 
     nextButton.addEventListener('click', function() {
