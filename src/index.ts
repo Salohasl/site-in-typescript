@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function increaseImg() {
         const licenseImages: NodeListOf<HTMLImageElement> = document.querySelectorAll('.license-img');
-        const swiper: HTMLDivElement = document.querySelector('.swiper');
+        const swiper: HTMLDivElement = document.querySelector('.swiperTwo');
         const close: HTMLDivElement = document.querySelector('.close');
 
         licenseImages.forEach((licenseImg: HTMLImageElement) => {
