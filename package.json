@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "deploy": "gh-pages -d dist",
+    "deploy": "git subtree push --prefix dist origin gh-pages",
     "serve": "webpack serve --open --mode development",
     "dev": "webpack --mode development",
     "build": "webpack --mode production",
@@ -15,6 +15,7 @@
   "license": "ISC",
   "devDependencies": {
     "css-loader": "^7.1.1",
+    "git-subtree": "^0.2.1",
     "html-loader": "^5.0.0",
     "mini-css-extract-plugin": "^2.9.0",
     "sass": "^1.75.0",
